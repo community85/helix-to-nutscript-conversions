@@ -1,5 +1,5 @@
 ITEM.name = "Squad Identification Device"
-ITEM.description = "A device that allows for easy identification of squad members."
+ITEM.des = "A device that allows for easy identification of squad members."
 ITEM.model = "models/Items/battery.mdl"
 ITEM.width = 1
 ITEM.height = 1
@@ -18,7 +18,7 @@ ITEM.functions.join = {
 	icon = "icon16/add.png",
 	OnRun = function(item, data)
 		net.Start("JoinSquad")
-            net.WriteTable(ix.squadsystem.squads)
+            net.WriteTable(nut.squadsystem.squads)
         net.Send(item.player)
 		return false
 	end
@@ -29,12 +29,12 @@ ITEM.functions.manage = {
     OnRun = function(item, data)
         local char = item.player:getChar()
         local squadName = char:GetSquad() or nil
-        local squad = ix.squadsystem.squads[squadName] or nil
+        local squad = nut.squadsystem.squads[squadName] or nil
         if (squad) and (squad[1].member == item.player) then
             net.Start("ManageSquad")
             net.Send(item.player)
         else
-            item.player:Notify("You are not a squad leader.")
+            item.player:notify("You are not a squad leader.")
         end
         return false
     end
@@ -43,7 +43,7 @@ ITEM.functions.leave = {
     name = "Leave Squad",
     icon = "icon16/delete.png",
     OnRun = function(item, data)
-        ix.squadsystem.LeaveSquad(item.player)
+        nut.squadsystem.LeaveSquad(item.player)
         return false
     end
 }
