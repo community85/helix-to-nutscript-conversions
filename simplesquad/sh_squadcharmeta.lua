@@ -8,7 +8,7 @@ local charMeta = nut.meta.character or {}
 ]]--
 
 function charMeta:getSquad()
-	local squadInfo = self:getData()("squadInfo")
+	local squadInfo = self:getData("squadInfo") --used to be ()("squadInfo")
 	local squad = nil
 
 	if squadInfo then
