@@ -4,10 +4,10 @@ PLUGIN.description = "A simple squad system for military themed servers."
 
 -- [[ INCLUDES ]] --
 
-nut.util.Include("sh_squadcore.lua")
-nut.util.Include("sh_squadcharmeta.lua")
-nut.util.Include("sh_squadcommands.lua")
-nut.util.Include("cl_squadderma.lua")
+nut.util.include("sh_squadcore.lua")
+nut.util.include("sh_squadcharmeta.lua")
+nut.util.include("sh_squadcommands.lua")
+nut.util.include("cl_squadderma.lua")
 
 if CLIENT then
 

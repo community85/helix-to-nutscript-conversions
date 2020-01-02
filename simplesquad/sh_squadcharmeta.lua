@@ -8,7 +8,7 @@ local CHARMETA = nut.meta.character or {}
 ]]--
 
 function CHARMETA:GetSquad()
-	local squadInfo = self:GetData("squadInfo")
+	local squadInfo = self:getData()("squadInfo")
 	local squad = nil
 
 	if squadInfo then
@@ -33,8 +33,8 @@ end
 ]]--
 
 function CHARMETA:SetSquadColor(color)
-	local squadInfo = self:GetData("squadInfo", nil)
-	local client = self:GetPlayer()
+	local squadInfo = self:getData()("squadInfo", nil)
+	local client = self:getPlayer()
 	local colorTable = {
 		red = Color(255, 0, 0),
 		green = Color(0, 255, 0),
@@ -54,9 +54,9 @@ function CHARMETA:SetSquadColor(color)
 			end
 		end
 
-		client:Notify("You have set your color to "..color..'.')
+		client:notify("You have set your color to "..color..'.')
 	else
-		client:Notify("Invalid color.")
+		client:notify("Invalid color.")
 	end
 
 	nut.squadsystem.SyncSquad(squadInfo.squad)

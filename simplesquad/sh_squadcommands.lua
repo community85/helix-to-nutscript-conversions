@@ -34,7 +34,7 @@ nut.command.Add("printsquadinfo", {
 		nut.type.character
 	},
 	OnRun = function(self, client, target)
-		local squadInfo = target:GetData("squadInfo")
+		local squadInfo = target:getData()("squadInfo")
 
 		print(squadInfo)
 		print(type(squadInfo))

@@ -56,7 +56,7 @@ function nut.squadsystem.SetSquadLeader(client)
 				nut.squadsystem.squads[squadName][1] = v2
 				nut.squadsystem.squads[squadName][k] = v1
 
-				client:Notify("You have been promoted to squad leader.")
+				client:notify("You have been promoted to squad leader.")
 
 				break
 			end
@@ -77,16 +77,16 @@ function nut.squadsystem.CreateSquad(client, squad)
 
 		local tab = { -- player information that will be inserted into the squad table.
 			member = client,
-			color = client:getChar():GetData("squadInfo").color
+			color = client:getChar():getData()("squadInfo").color
 		}
 
 		nut.squadsystem.squads[squad] = {tab}
 
 		nut.squadsystem.SyncSquad(squad)
 
-		client:Notify("You have created "..squad..'.')
+		client:notify("You have created "..squad..'.')
 	else
-		client:Notify("Squad already exists.")
+		client:notify("Squad already exists.")
 	end
 end
 
@@ -101,7 +101,7 @@ function nut.squadsystem.JoinSquad(client, squad) -- Replacing client with ply h
 
 		local tab = { -- player information that will be inserted into the squad table.
 			member = client,
-			color = client:getChar():GetData("squadInfo").color
+			color = client:getChar():getData()("squadInfo").color
 		}
 
 		if nut.squadsystem.squads[squad] then
@@ -110,9 +110,9 @@ function nut.squadsystem.JoinSquad(client, squad) -- Replacing client with ply h
 
 		nut.squadsystem.SyncSquad(squad)
 
-		client:Notify("You have joined "..squad..'.')
+		client:notify("You have joined "..squad..'.')
 	else
-		client:Notify("Squad does not exist.")
+		client:notify("Squad does not exist.")
 	end
 end
 
@@ -167,13 +167,13 @@ function nut.squadsystem.LeaveSquad(client, character)
 			nut.squadsystem.SyncSquad(squadName)
 
 			if isKick then
-				client:Notify("You have been removed from "..squadName..'.')
+				client:notify("You have been removed from "..squadName..'.')
 			else
-				client:Notify("You have left "..squadName..'.')
+				client:notify("You have left "..squadName..'.')
 			end
 		end
 	else
-		client:Notify("You are not a part of a squad.")
+		client:notify("You are not a part of a squad.")
 	end
 
 	character:ClearSquadInfo()
