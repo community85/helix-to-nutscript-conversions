@@ -60,7 +60,7 @@ nut.command.add("clearsquadinfo", {
 		nut.type.character
 	},
 	onRun = function(self, client, target)
-		target:ClearSquadInfo()
+		target:clearSquadInfo()
 	end
 })
 

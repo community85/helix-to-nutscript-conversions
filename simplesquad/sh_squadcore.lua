@@ -176,5 +176,5 @@ function nut.squadsystem.LeaveSquad(client, character)
 		client:notify("You are not a part of a squad.")
 	end
 
-	character:ClearSquadInfo()
+	character:clearSquadInfo()
 end

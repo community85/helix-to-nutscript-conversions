@@ -5,7 +5,7 @@ PLUGIN.description = "A simple squad system for military themed servers."
 -- [[ INCLUDES ]] --
 
 nut.util.include("sh_squadcore.lua")
-nut.util.include("sh_squadcharmeta.lua")
+nut.util.include("sh_squadcharMeta.lua")
 nut.util.include("sh_squadcommands.lua")
 nut.util.include("cl_squadderma.lua")
 

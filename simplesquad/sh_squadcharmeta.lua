@@ -1,13 +1,13 @@
-local CHARMETA = nut.meta.character or {}
+local charMeta = nut.meta.character or {}
 
 -- [[ FUNCTIONS ]] --
 
 --[[ 
-	FUNCTION: CHARMETA:getSquad()
+	FUNCTION: charMeta:getSquad()
 	DESCRIPTION: Returns the character's current squad or nil
 ]]--
 
-function CHARMETA:getSquad()
+function charMeta:getSquad()
 	local squadInfo = self:getData()("squadInfo")
 	local squad = nil
 
@@ -19,20 +19,20 @@ function CHARMETA:getSquad()
 end
 
 --[[ 
-	FUNCTION:CHARMETA:ClearSquadInfo()
+	FUNCTION:charMeta:clearSquadInfo()
 	DESCRIPTION: Clears a character's squad info.
 ]]--
 
-function CHARMETA:ClearSquadInfo()
+function charMeta:clearSquadInfo()
 	self:SetData("squadInfo", nil)
 end
 
 --[[ 
-	FUNCTION: CHARMETA:SetSquadColor(color)
+	FUNCTION: charMeta:SetSquadColor(color)
 	DESCRIPTION: Sets the squad color of a character, which appears to other players.
 ]]--
 
-function CHARMETA:SetSquadColor(color)
+function charMeta:SetSquadColor(color)
 	local squadInfo = self:getData()("squadInfo", nil)
 	local client = self:getPlayer()
 	local colorTable = {
