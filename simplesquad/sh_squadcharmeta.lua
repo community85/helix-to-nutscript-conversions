@@ -1,4 +1,4 @@
-local CHARMETA = ix.meta.character or {}
+local CHARMETA = nut.meta.character or {}
 
 -- [[ FUNCTIONS ]] --
 
@@ -48,7 +48,7 @@ function CHARMETA:SetSquadColor(color)
 
 		self:SetData("squadInfo", squadInfo)
 
-		for _, v in pairs(ix.squadsystem.squads[squadInfo.squad]) do
+		for _, v in pairs(nut.squadsystem.squads[squadInfo.squad]) do
 			if v.member == client then
 				v.color = colorTable[color]
 			end
@@ -59,5 +59,5 @@ function CHARMETA:SetSquadColor(color)
 		client:Notify("Invalid color.")
 	end
 
-	ix.squadsystem.SyncSquad(squadInfo.squad)
+	nut.squadsystem.SyncSquad(squadInfo.squad)
 end
