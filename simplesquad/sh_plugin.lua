@@ -4,10 +4,10 @@ PLUGIN.description = "A simple squad system for military themed servers."
 
 -- [[ INCLUDES ]] --
 
-ix.util.Include("sh_squadcore.lua")
-ix.util.Include("sh_squadcharmeta.lua")
-ix.util.Include("sh_squadcommands.lua")
-ix.util.Include("cl_squadderma.lua")
+nut.util.Include("sh_squadcore.lua")
+nut.util.Include("sh_squadcharmeta.lua")
+nut.util.Include("sh_squadcommands.lua")
+nut.util.Include("cl_squadderma.lua")
 
 if CLIENT then
 
@@ -15,19 +15,19 @@ if CLIENT then
 
 	squad = squad or {}
 
-	ix.squadsystem.squads = ix.squadsystem.squads or {}
+	nut.squadsystem.squads = nut.squadsystem.squads or {}
 
 	net.Receive( "CreateSquad", function()
-		vgui.Create("ixSquadCreate")
+		vgui.Create("nutSquadCreate")
 	end)
 
 	net.Receive( "ManageSquad", function()
-		vgui.Create("ixSquadManage")
+		vgui.Create("nutSquadManage")
 	end)
 
 	net.Receive( "JoinSquad", function()
-		ix.squadsystem.squads = net.ReadTable()
-		vgui.Create("ixSquadJoin")
+		nut.squadsystem.squads = net.ReadTable()
+		vgui.Create("nutSquadJoin")
 	end)
 
 	net.Receive("SquadSync", function()
@@ -84,27 +84,27 @@ else
 
 		print("CreateSquad")
 
-		ix.squadsystem.CreateSquad(tab[1], tab[2])
+		nut.squadsystem.CreateSquad(tab[1], tab[2])
 	end )
 
 	net.Receive( "JoinSquad", function( len, pl )
 		local tab = net.ReadTable()
 
-		ix.squadsystem.JoinSquad(tab[1], tab[2])
+		nut.squadsystem.JoinSquad(tab[1], tab[2])
 	end)
 
 	net.Receive("SquadKick", function()
 		local tab = net.ReadTable()
 		local client = tab[1]
 
-		ix.squadsystem.LeaveSquad(client)
+		nut.squadsystem.LeaveSquad(client)
 	end)
 
 	net.Receive("SquadPromote", function()
 		local tab = net.ReadTable()
 		local client = tab[1]
 
-		ix.squadsystem.SetSquadLeader(client)
+		nut.squadsystem.SetSquadLeader(client)
 	end)
 
 	net.Receive("SquadSync", function()
@@ -121,7 +121,7 @@ end
 
 function PLUGIN:OnCharacterDisconnect(client, character)
 	if character:GetSquad() then
-		ix.squadsystem.LeaveSquad(client)
+		nut.squadsystem.LeaveSquad(client)
 	end
 end
 
@@ -132,6 +132,6 @@ end
 
 function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
 	if (lastChar and lastChar:GetSquad()) then
-		ix.squadsystem.LeaveSquad(client, lastChar)
+		nut.squadsystem.LeaveSquad(client, lastChar)
 	end
 end
