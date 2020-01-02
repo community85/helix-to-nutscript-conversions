@@ -77,14 +77,14 @@ function nut.squadsystem.CreateSquad(client, squad)
 
 		local tab = { -- player information that will be inserted into the squad table.
 			member = client,
-			color = client:getChar():getData()("squadInfo").color
+			color = client:getChar():getData("squadInfo").color
 		}
 
 		nut.squadsystem.squads[squad] = {tab}
 
 		nut.squadsystem.SyncSquad(squad)
 
-		client:notify("You have created "..squad..'.')
+		client:notify("You have created squad "..squad..'.')
 	else
 		client:notify("Squad already exists.")
 	end

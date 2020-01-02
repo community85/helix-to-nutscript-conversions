@@ -33,7 +33,7 @@ end
 ]]--
 
 function charMeta:SetSquadColor(color)
-	local squadInfo = self:getData()("squadInfo", nil)
+	local squadInfo = self:getData("squadInfo", nil)
 	local client = self:getPlayer()
 	local colorTable = {
 		red = Color(255, 0, 0),
