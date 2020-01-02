@@ -28,7 +28,7 @@ nut.command.add("printsquads", {
 ]]
 
 nut.command.add("printsquadinfo", {
-	syntax = "<player>",
+	syntax = "<string player>",
 	description = "prints squad info of target.",
 
 	onRun = function(client, arguments)
@@ -70,8 +70,8 @@ nut.command.add("clearsquadinfo", {
 nut.command.add("syncallsquads", {
 	syntax = "<none>",
 	description = "Resyncs all squads.",
-	onRun = function(client, arguments)
-		local target = nut.command.findPlayer(client, arguments[1])
+	onRun = function(self, client)
+		--local target = nut.command.findPlayer(client, arguments[1])
 		for k, _ in pairs(nut.squadsystem.squads) do
 			nut.squadsystem.syncSquad(k)
 		end

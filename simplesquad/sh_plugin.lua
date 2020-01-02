@@ -1,6 +1,6 @@
 PLUGIN.name = "Simple Squad"
 PLUGIN.author = "Hoooldini"
-PLUGIN.description = "A simple squad system for military themed servers."
+PLUGIN.desc = "A simple squad system for military themed servers."
 
 -- [[ INCLUDES ]] --
 
