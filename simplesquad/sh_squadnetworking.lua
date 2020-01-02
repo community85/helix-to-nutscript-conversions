@@ -19,27 +19,27 @@ if SERVER then
 
 		print("CreateSquad")
 
-		ix.squadsystem.CreateSquad(tab[1], tab[2])
+		nut.squadsystem.CreateSquad(tab[1], tab[2])
 	end )
 
 	net.Receive( "JoinSquad", function( len, pl )
 		local tab = net.ReadTable()
 
-		ix.squadsystem.JoinSquad(tab[1], tab[2])
+		nut.squadsystem.JoinSquad(tab[1], tab[2])
 	end)
 
 	net.Receive("SquadKick", function()
 		local tab = net.ReadTable()
 		local client = tab[1]
 
-		ix.squadsystem.LeaveSquad(client)
+		nut.squadsystem.LeaveSquad(client)
 	end)
 
 	net.Receive("SquadPromote", function()
 		local tab = net.ReadTable()
 		local client = tab[1]
 
-		ix.squadsystem.SetSquadLeader(client)
+		nut.squadsystem.SetSquadLeader(client)
 	end)
 
 	net.Receive("SquadSync", function()
@@ -48,19 +48,19 @@ if SERVER then
 else
 	squad = squad or {}
 
-	ix.squadsystem.squads = ix.squadsystem.squads or {}
+	nut.squadsystem.squads = nut.squadsystem.squads or {}
 
 	net.Receive( "CreateSquad", function()
-		vgui.Create("ixSquadCreate")
+		vgui.Create("nutSquadCreate")
 	end)
 
 	net.Receive( "ManageSquad", function()
-		vgui.Create("ixSquadManage")
+		vgui.Create("nutSquadManage")
 	end)
 
 	net.Receive( "JoinSquad", function()
-		ix.squadsystem.squads = net.ReadTable()
-		vgui.Create("ixSquadJoin")
+		nut.squadsystem.squads = net.ReadTable()
+		vgui.Create("nutSquadJoin")
 	end)
 
 	net.Receive("SquadSync", function()
