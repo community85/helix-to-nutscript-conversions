@@ -27,7 +27,7 @@ ITEM.functions.manage = {
     name = "Manage Squad",
     icon = "icon16/wrench.png",
     OnRun = function(item, data)
-        local char = item.player:GetCharacter()
+        local char = item.player:getChar()
         local squadName = char:GetSquad() or nil
         local squad = ix.squadsystem.squads[squadName] or nil
         if (squad) and (squad[1].member == item.player) then
@@ -88,7 +88,7 @@ ITEM.functions.setcolor = {
         return options
     end,
     OnRun = function(item, data)
-        item.player:GetCharacter():SetSquadColor(data.color)
+        item.player:getChar():SetSquadColor(data.color)
         return false
     end
 }

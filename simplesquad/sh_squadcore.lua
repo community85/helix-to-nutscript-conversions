@@ -44,7 +44,7 @@ end
 ]]--
 
 function nut.squadsystem.SetSquadLeader(client)
-	local char = client:GetCharacter()
+	local char = client:getChar()
 	local squadName = char:GetSquad()
 	local squad = nut.squadsystem.squads[squadName]
 
@@ -77,7 +77,7 @@ function nut.squadsystem.CreateSquad(client, squad)
 
 		local tab = { -- player information that will be inserted into the squad table.
 			member = client,
-			color = client:GetCharacter():GetData("squadInfo").color
+			color = client:getChar():GetData("squadInfo").color
 		}
 
 		nut.squadsystem.squads[squad] = {tab}
@@ -101,7 +101,7 @@ function nut.squadsystem.JoinSquad(client, squad) -- Replacing client with ply h
 
 		local tab = { -- player information that will be inserted into the squad table.
 			member = client,
-			color = client:GetCharacter():GetData("squadInfo").color
+			color = client:getChar():GetData("squadInfo").color
 		}
 
 		if nut.squadsystem.squads[squad] then
@@ -123,7 +123,7 @@ end
 ]]--
 
 function nut.squadsystem.InitializeSquadInfo(client, group) -- Squad is referred to as group here so that I can use the variable "squad" later in the function.
-	local char = client:GetCharacter()
+	local char = client:getChar()
 	local groupInfo = { -- Decided to keep it consistent here too by using group instead of squad.
 		squad = group,
 		color = Color(255, 255, 255) -- Default color is white.
@@ -148,7 +148,7 @@ function nut.squadsystem.LeaveSquad(client, character)
 	if character then
 		isKick = true
 	else
-		character = client:GetCharacter()
+		character = client:getChar()
 	end
 
 	if character and character:GetSquad() then
