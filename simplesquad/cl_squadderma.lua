@@ -41,7 +41,7 @@ function PANEL:Think()
 	self:MoveToFront()
 end
 
-vgui.Register("ixSquadCreate", PANEL, "DFrame")
+vgui.Register("nutSquadCreate", PANEL, "DFrame")
 
 PANEL = {}
 
@@ -79,7 +79,7 @@ function PANEL:Init()
 	self.squadlist:SetTall(225)
 	self.squadlist:AddColumn("Squad")
 
-	for k, v in pairs(ix.squadsystem.squads) do
+	for k, v in pairs(nut.squadsystem.squads) do
 		self.squadlist:AddLine(k, "Squad")
 	end
 
@@ -92,7 +92,7 @@ function PANEL:Think()
 	self:MoveToFront()
 end
 
-vgui.Register("ixSquadJoin", PANEL, "DFrame")
+vgui.Register("nutSquadJoin", PANEL, "DFrame")
 
 PANEL = {}
 
@@ -158,4 +158,4 @@ function PANEL:Think()
 	self:MoveToFront()
 end
 
-vgui.Register("ixSquadManage", PANEL, "DFrame")
+vgui.Register("nutSquadManage", PANEL, "DFrame")
