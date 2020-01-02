@@ -11,7 +11,7 @@
 nut.command.add("printsquads", {
 	syntax = "<none>",
 	description = "Prints the squads.",
-	onRun = function(self, client)
+	onRun = function(client, arguments)
 		for k, v in pairs(nut.squadsystem.squads) do
 			print(k.." = {")
 			for i, j in pairs(v) do
@@ -30,11 +30,10 @@ nut.command.add("printsquads", {
 nut.command.add("printsquadinfo", {
 	syntax = "<player>",
 	description = "prints squad info of target.",
-	arguments = {
-		nut.type.character
-	},
-	onRun = function(self, client, target)
-		local squadInfo = target:getData()("squadInfo")
+
+	onRun = function(client, arguments)
+		local target = nut.command.findPlayer(client, arguments[1])
+		local squadInfo = target:getData("squadInfo")
 
 		print(squadInfo)
 		print(type(squadInfo))
@@ -56,10 +55,9 @@ nut.command.add("printsquadinfo", {
 nut.command.add("clearsquadinfo", {
 	syntax = "<player>",
 	description = "Clears squad info of target.",
-	arguments = {
-		nut.type.character
-	},
-	onRun = function(self, client, target)
+
+	onRun = function(client, arguments)
+		local target = nut.command.findPlayer(client, arguments[1])
 		target:clearSquadInfo()
 	end
 })
@@ -72,7 +70,8 @@ nut.command.add("clearsquadinfo", {
 nut.command.add("syncallsquads", {
 	syntax = "<none>",
 	description = "Resyncs all squads.",
-	onRun = function(self, client)
+	onRun = function(client, arguments)
+		local target = nut.command.findPlayer(client, arguments[1])
 		for k, _ in pairs(nut.squadsystem.squads) do
 			nut.squadsystem.syncSquad(k)
 		end
