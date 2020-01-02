@@ -120,7 +120,7 @@ end
 ]]--
 
 function PLUGIN:OnCharacterDisconnect(client, character)
-	if character:GetSquad() then
+	if character:getSquad() then
 		nut.squadsystem.LeaveSquad(client)
 	end
 end
@@ -131,7 +131,7 @@ end
 ]]--
 
 function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
-	if (lastChar and lastChar:GetSquad()) then
+	if (lastChar and lastChar:getSquad()) then
 		nut.squadsystem.LeaveSquad(client, lastChar)
 	end
 end

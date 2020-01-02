@@ -1,13 +1,14 @@
 ITEM.name = "Squad Identification Device"
-ITEM.des = "A device that allows for easy identification of squad members."
+ITEM.desc = "A device that allows for easy identification of squad members."
 ITEM.model = "models/Items/battery.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.category = "Utility"
+ITEM.flag = "v"
 ITEM.functions.create = {
     name = "Create Squad",
     icon = "icon16/asterisk_yellow.png",
-    OnRun = function(item, data)
+    onRun = function(item, data)
         net.Start("CreateSquad")
         net.Send(item.player)
         return false
@@ -16,7 +17,7 @@ ITEM.functions.create = {
 ITEM.functions.join = {
 	name = "Join Squad",
 	icon = "icon16/add.png",
-	OnRun = function(item, data)
+	onRun = function(item, data)
 		net.Start("JoinSquad")
             net.WriteTable(nut.squadsystem.squads)
         net.Send(item.player)
@@ -26,9 +27,9 @@ ITEM.functions.join = {
 ITEM.functions.manage = {
     name = "Manage Squad",
     icon = "icon16/wrench.png",
-    OnRun = function(item, data)
+    onRun = function(item, data)
         local char = item.player:getChar()
-        local squadName = char:GetSquad() or nil
+        local squadName = char:getSquad() or nil
         local squad = nut.squadsystem.squads[squadName] or nil
         if (squad) and (squad[1].member == item.player) then
             net.Start("ManageSquad")
@@ -42,7 +43,7 @@ ITEM.functions.manage = {
 ITEM.functions.leave = {
     name = "Leave Squad",
     icon = "icon16/delete.png",
-    OnRun = function(item, data)
+    onRun = function(item, data)
         nut.squadsystem.LeaveSquad(item.player)
         return false
     end
@@ -87,7 +88,7 @@ ITEM.functions.setcolor = {
 
         return options
     end,
-    OnRun = function(item, data)
+    onRun = function(item, data)
         item.player:getChar():SetSquadColor(data.color)
         return false
     end

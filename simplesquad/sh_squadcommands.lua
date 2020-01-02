@@ -8,10 +8,10 @@
 	DESCRIPTION: Prints all currently populated squads to the console.
 ]]
 
-nut.command.Add("printsquads", {
+nut.command.add("printsquads", {
 	syntax = "<none>",
 	description = "Prints the squads.",
-	OnRun = function(self, client)
+	onRun = function(self, client)
 		for k, v in pairs(nut.squadsystem.squads) do
 			print(k.." = {")
 			for i, j in pairs(v) do
@@ -27,13 +27,13 @@ nut.command.Add("printsquads", {
 	DESCRIPTION: Prints a player's squad info to the console.
 ]]
 
-nut.command.Add("printsquadinfo", {
+nut.command.add("printsquadinfo", {
 	syntax = "<player>",
 	description = "prints squad info of target.",
 	arguments = {
 		nut.type.character
 	},
-	OnRun = function(self, client, target)
+	onRun = function(self, client, target)
 		local squadInfo = target:getData()("squadInfo")
 
 		print(squadInfo)
@@ -53,13 +53,13 @@ nut.command.Add("printsquadinfo", {
 	DESCRIPTION: Clears the squad info of a player.
 ]]
 
-nut.command.Add("clearsquadinfo", {
+nut.command.add("clearsquadinfo", {
 	syntax = "<player>",
 	description = "Clears squad info of target.",
 	arguments = {
 		nut.type.character
 	},
-	OnRun = function(self, client, target)
+	onRun = function(self, client, target)
 		target:ClearSquadInfo()
 	end
 })
@@ -69,10 +69,10 @@ nut.command.Add("clearsquadinfo", {
 	DESCRIPTION: Resyncs all squads with the server's information.
 ]]
 
-nut.command.Add("syncallsquads", {
+nut.command.add("syncallsquads", {
 	syntax = "<none>",
 	description = "Resyncs all squads.",
-	OnRun = function(self, client)
+	onRun = function(self, client)
 		for k, _ in pairs(nut.squadsystem.squads) do
 			nut.squadsystem.SyncSquad(k)
 		end

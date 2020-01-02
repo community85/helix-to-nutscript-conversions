@@ -45,7 +45,7 @@ end
 
 function nut.squadsystem.SetSquadLeader(client)
 	local char = client:getChar()
-	local squadName = char:GetSquad()
+	local squadName = char:getSquad()
 	local squad = nut.squadsystem.squads[squadName]
 
 	if (squadName and squad) then
@@ -129,7 +129,7 @@ function nut.squadsystem.InitializeSquadInfo(client, group) -- Squad is referred
 		color = Color(255, 255, 255) -- Default color is white.
 	}
 
-	if char:GetSquad() then
+	if char:getSquad() then
 		nut.squadsystem.LeaveSquad(client)
 	end
 
@@ -151,8 +151,8 @@ function nut.squadsystem.LeaveSquad(client, character)
 		character = client:getChar()
 	end
 
-	if character and character:GetSquad() then
-		local squadName = character:GetSquad()
+	if character and character:getSquad() then
+		local squadName = character:getSquad()
 		local squad = nut.squadsystem.squads[squadName]
 
 		nut.squadsystem.GiveEmptySquad(client)

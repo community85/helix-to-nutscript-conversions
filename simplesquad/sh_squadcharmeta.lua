@@ -3,11 +3,11 @@ local CHARMETA = nut.meta.character or {}
 -- [[ FUNCTIONS ]] --
 
 --[[ 
-	FUNCTION: CHARMETA:GetSquad()
+	FUNCTION: CHARMETA:getSquad()
 	DESCRIPTION: Returns the character's current squad or nil
 ]]--
 
-function CHARMETA:GetSquad()
+function CHARMETA:getSquad()
 	local squadInfo = self:getData()("squadInfo")
 	local squad = nil
 
