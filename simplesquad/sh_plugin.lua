@@ -17,20 +17,20 @@ if CLIENT then
 
 	nut.squadsystem.squads = nut.squadsystem.squads or {}
 
-	net.Receive( "CreateSquad", function()
+	net.Receive( "createSquad", function()
 		vgui.Create("nutSquadCreate")
 	end)
 
-	net.Receive( "ManageSquad", function()
+	net.Receive( "manageSquad", function()
 		vgui.Create("nutSquadManage")
 	end)
 
-	net.Receive( "JoinSquad", function()
+	net.Receive( "joinSquad", function()
 		nut.squadsystem.squads = net.ReadTable()
 		vgui.Create("nutSquadJoin")
 	end)
 
-	net.Receive("SquadSync", function()
+	net.Receive("squadSync", function()
 		squad = net.ReadTable()
 	end)
 
@@ -72,42 +72,42 @@ if CLIENT then
 else
 	--[[ NETWORKING ]] --
 
-	util.AddNetworkString("CreateSquad")
-	util.AddNetworkString("JoinSquad")
-	util.AddNetworkString("ManageSquad")
-	util.AddNetworkString("SquadKick")
-	util.AddNetworkString("SquadPromote")
-	util.AddNetworkString("SquadSync")
+	util.AddNetworkString("createSquad")
+	util.AddNetworkString("joinSquad")
+	util.AddNetworkString("manageSquad")
+	util.AddNetworkString("squadKick")
+	util.AddNetworkString("squadPromote")
+	util.AddNetworkString("squadSync")
 
-	net.Receive( "CreateSquad", function( len, pl )
+	net.Receive( "createSquad", function( len, pl )
 		local tab = net.ReadTable()
 
-		print("CreateSquad")
+		print("createSquad")
 
-		nut.squadsystem.CreateSquad(tab[1], tab[2])
+		nut.squadsystem.createSquad(tab[1], tab[2])
 	end )
 
-	net.Receive( "JoinSquad", function( len, pl )
+	net.Receive( "joinSquad", function( len, pl )
 		local tab = net.ReadTable()
 
-		nut.squadsystem.JoinSquad(tab[1], tab[2])
+		nut.squadsystem.joinSquad(tab[1], tab[2])
 	end)
 
-	net.Receive("SquadKick", function()
-		local tab = net.ReadTable()
-		local client = tab[1]
-
-		nut.squadsystem.LeaveSquad(client)
-	end)
-
-	net.Receive("SquadPromote", function()
+	net.Receive("squadKick", function()
 		local tab = net.ReadTable()
 		local client = tab[1]
 
-		nut.squadsystem.SetSquadLeader(client)
+		nut.squadsystem.leaveSquad(client)
 	end)
 
-	net.Receive("SquadSync", function()
+	net.Receive("squadPromote", function()
+		local tab = net.ReadTable()
+		local client = tab[1]
+
+		nut.squadsystem.setSquadLeader(client)
+	end)
+
+	net.Receive("squadSync", function()
 		squad = net.ReadTable()
 	end)
 end
@@ -121,7 +121,7 @@ end
 
 function PLUGIN:OnCharacterDisconnect(client, character)
 	if character:getSquad() then
-		nut.squadsystem.LeaveSquad(client)
+		nut.squadsystem.leaveSquad(client)
 	end
 end
 
@@ -132,6 +132,6 @@ end
 
 function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
 	if (lastChar and lastChar:getSquad()) then
-		nut.squadsystem.LeaveSquad(client, lastChar)
+		nut.squadsystem.leaveSquad(client, lastChar)
 	end
 end

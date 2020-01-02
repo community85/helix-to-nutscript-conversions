@@ -24,15 +24,15 @@ end
 ]]--
 
 function charMeta:clearSquadInfo()
-	self:SetData("squadInfo", nil)
+	self:setData("squadInfo", nil)
 end
 
 --[[ 
-	FUNCTION: charMeta:SetSquadColor(color)
+	FUNCTION: charMeta:setSquadColor(color)
 	DESCRIPTION: Sets the squad color of a character, which appears to other players.
 ]]--
 
-function charMeta:SetSquadColor(color)
+function charMeta:setSquadColor(color)
 	local squadInfo = self:getData("squadInfo", nil)
 	local client = self:getPlayer()
 	local colorTable = {
@@ -46,7 +46,7 @@ function charMeta:SetSquadColor(color)
 	if (colorTable[color]) then
 		squadInfo.color = colorTable[color]
 
-		self:SetData("squadInfo", squadInfo)
+		self:setData("squadInfo", squadInfo)
 
 		for _, v in pairs(nut.squadsystem.squads[squadInfo.squad]) do
 			if v.member == client then
@@ -59,5 +59,5 @@ function charMeta:SetSquadColor(color)
 		client:notify("Invalid color.")
 	end
 
-	nut.squadsystem.SyncSquad(squadInfo.squad)
+	nut.squadsystem.syncSquad(squadInfo.squad)
 end

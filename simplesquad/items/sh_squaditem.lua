@@ -9,7 +9,7 @@ ITEM.functions.create = {
     name = "Create Squad",
     icon = "icon16/asterisk_yellow.png",
     onRun = function(item, data)
-        net.Start("CreateSquad")
+        net.Start("createSquad")
         net.Send(item.player)
         return false
     end
@@ -18,7 +18,7 @@ ITEM.functions.join = {
 	name = "Join Squad",
 	icon = "icon16/add.png",
 	onRun = function(item, data)
-		net.Start("JoinSquad")
+		net.Start("joinSquad")
             net.WriteTable(nut.squadsystem.squads)
         net.Send(item.player)
 		return false
@@ -32,7 +32,7 @@ ITEM.functions.manage = {
         local squadName = char:getSquad() or nil
         local squad = nut.squadsystem.squads[squadName] or nil
         if (squad) and (squad[1].member == item.player) then
-            net.Start("ManageSquad")
+            net.Start("manageSquad")
             net.Send(item.player)
         else
             item.player:notify("You are not a squad leader.")
@@ -44,7 +44,7 @@ ITEM.functions.leave = {
     name = "Leave Squad",
     icon = "icon16/delete.png",
     onRun = function(item, data)
-        nut.squadsystem.LeaveSquad(item.player)
+        nut.squadsystem.leaveSquad(item.player)
         return false
     end
 }
@@ -89,7 +89,7 @@ ITEM.functions.setcolor = {
         return options
     end,
     onRun = function(item, data)
-        item.player:getChar():SetSquadColor(data.color)
+        item.player:getChar():setSquadColor(data.color)
         return false
     end
 }

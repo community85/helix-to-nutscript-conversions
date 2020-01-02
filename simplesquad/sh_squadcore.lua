@@ -6,18 +6,18 @@ nut.squadsystem.squads = nut.squadsystem.squads or {}
 -- [[ FUNCTIONS ]] --
 
 --[[ 
-	FUNCTION: nut.squadsystem.SyncSquad(squad)
+	FUNCTION: nut.squadsystem.syncSquad(squad)
 	DESCRIPTION: Syncs all members of the provided squad.
 ]]--
 
-function nut.squadsystem.SyncSquad(squad)
+function nut.squadsystem.syncSquad(squad)
 	local squadTable = nut.squadsystem.squads[squad]
 
 	if !(squadTable) or table.IsEmpty(nut.squadsystem.squads[squad]) then
 		nut.squadsystem.squads[squad] = nil
 	else
 		for k, v in pairs(squadTable) do
-			net.Start("SquadSync")
+			net.Start("squadSync")
 				net.WriteTable(squadTable)
 			net.Send(v.member)
 		end		
@@ -25,25 +25,25 @@ function nut.squadsystem.SyncSquad(squad)
 end
 
 --[[
-	FUNCTION: nut.squadsystem.GiveEmptySquad(client)
+	FUNCTION: nut.squadsystem.giveEmptySquad(client)
 	DESCRIPTION: Gives the client an empty squad. This is used
 	to clear the version of the squad the client has so that
 	they don't draw squad markers over anyone's head.
 ]]--
 
-function nut.squadsystem.GiveEmptySquad(client)
-	net.Start("SquadSync")
+function nut.squadsystem.giveEmptySquad(client)
+	net.Start("squadSync")
 		net.WriteTable({})
 	net.Send(client)
 end
 
 --[[
-	FUNCTION: nut.squadsystem.SetSquadLeader(client)
+	FUNCTION: nut.squadsystem.setSquadLeader(client)
 	DESCRIPTION: Sets the designated user to be the squad
 	leader of their squad.
 ]]--
 
-function nut.squadsystem.SetSquadLeader(client)
+function nut.squadsystem.setSquadLeader(client)
 	local char = client:getChar()
 	local squadName = char:getSquad()
 	local squad = nut.squadsystem.squads[squadName]
@@ -63,15 +63,15 @@ function nut.squadsystem.SetSquadLeader(client)
 		end
 	end
 
-	nut.squadsystem.SyncSquad(squadName)
+	nut.squadsystem.syncSquad(squadName)
 end
 
 --[[
-	FUNCTION: nut.squadsystem.CreateSquad(client, squad)
+	FUNCTION: nut.squadsystem.createSquad(client, squad)
 	DESCRIPTION: Creates a squad with the designated name.
 ]]--
 
-function nut.squadsystem.CreateSquad(client, squad)
+function nut.squadsystem.createSquad(client, squad)
 	if !(nut.squadsystem.squads[squad]) then -- Prevents the creation of the squad if it already exists.
 		nut.squadsystem.InitializeSquadInfo(client, squad)
 
@@ -82,7 +82,7 @@ function nut.squadsystem.CreateSquad(client, squad)
 
 		nut.squadsystem.squads[squad] = {tab}
 
-		nut.squadsystem.SyncSquad(squad)
+		nut.squadsystem.syncSquad(squad)
 
 		client:notify("You have created squad "..squad..'.')
 	else
@@ -91,11 +91,11 @@ function nut.squadsystem.CreateSquad(client, squad)
 end
 
 --[[
-	FUNCTION: nut.squadsystem.JoinSquad(client, squad)
+	FUNCTION: nut.squadsystem.joinSquad(client, squad)
 	DESCRIPTION: Makes the designated client join the designated squad.
 ]]--
 
-function nut.squadsystem.JoinSquad(client, squad) -- Replacing client with ply here to use client later.
+function nut.squadsystem.joinSquad(client, squad) -- Replacing client with ply here to use client later.
 	if (nut.squadsystem.squads[squad]) then -- Can only join a squad if it exists.
 		nut.squadsystem.InitializeSquadInfo(client, squad)
 
@@ -108,7 +108,7 @@ function nut.squadsystem.JoinSquad(client, squad) -- Replacing client with ply h
 			table.insert(nut.squadsystem.squads[squad], tab)
 		end
 
-		nut.squadsystem.SyncSquad(squad)
+		nut.squadsystem.syncSquad(squad)
 
 		client:notify("You have joined "..squad..'.')
 	else
@@ -130,19 +130,19 @@ function nut.squadsystem.InitializeSquadInfo(client, group) -- Squad is referred
 	}
 
 	if char:getSquad() then
-		nut.squadsystem.LeaveSquad(client)
+		nut.squadsystem.leaveSquad(client)
 	end
 
-	char:SetData("squadInfo", groupInfo)
+	char:setData("squadInfo", groupInfo)
 end
 
 --[[
-	FUNCTION: nut.squadsystem.LeaveSquad(client, character)
+	FUNCTION: nut.squadsystem.leaveSquad(client, character)
 	DESCRIPTION: Makes the provided user leave their current
 	squad.
 ]]--
 
-function nut.squadsystem.LeaveSquad(client, character)
+function nut.squadsystem.leaveSquad(client, character)
 	local isKick = false
 
 	if character then
@@ -155,7 +155,7 @@ function nut.squadsystem.LeaveSquad(client, character)
 		local squadName = character:getSquad()
 		local squad = nut.squadsystem.squads[squadName]
 
-		nut.squadsystem.GiveEmptySquad(client)
+		nut.squadsystem.giveEmptySquad(client)
 
 		if squad then
 			for k, v in pairs(squad) do
@@ -164,7 +164,7 @@ function nut.squadsystem.LeaveSquad(client, character)
 				end
 			end
 
-			nut.squadsystem.SyncSquad(squadName)
+			nut.squadsystem.syncSquad(squadName)
 
 			if isKick then
 				client:notify("You have been removed from "..squadName..'.')

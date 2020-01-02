@@ -28,7 +28,7 @@ function PANEL:Init()
 		}
 	
 		if text then
-			net.Start("CreateSquad")
+			net.Start("createSquad")
 				net.WriteTable(tab)
 			net.SendToServer()
 
@@ -65,7 +65,7 @@ function PANEL:Init()
 		}
 	
 		if selected then
-			net.Start("JoinSquad")
+			net.Start("joinSquad")
 				net.WriteTable(tab)
 			net.SendToServer()
 
@@ -112,7 +112,7 @@ function PANEL:Init()
 	self.kick:SetText(L("Kick"))
 	self.kick.DoClick = function()
 		if squad then
-			net.Start("SquadKick")
+			net.Start("squadKick")
 				net.WriteTable(selected)
 			net.SendToServer()
 
@@ -127,7 +127,7 @@ function PANEL:Init()
 	self.promote:SetText(L("Promote"))
 	self.promote.DoClick = function()
 		if squad then
-			net.Start("SquadPromote")
+			net.Start("squadPromote")
 				net.WriteTable(selected)
 			net.SendToServer()
 

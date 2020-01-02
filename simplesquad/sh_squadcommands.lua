@@ -74,7 +74,7 @@ nut.command.add("syncallsquads", {
 	description = "Resyncs all squads.",
 	onRun = function(self, client)
 		for k, _ in pairs(nut.squadsystem.squads) do
-			nut.squadsystem.SyncSquad(k)
+			nut.squadsystem.syncSquad(k)
 		end
 	end
 })
